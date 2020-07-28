@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../logo.svg';
 import '../App.css';
 import axios from 'axios';
 
@@ -24,7 +23,7 @@ class Navbar extends React.Component {
 
   render() {
     const loggedIn = this.props.loggedIn;
-    console.log('navbar render, props: ', this.props);
+    console.log('navbar props: ', this.props);
       
     return (
       <div>

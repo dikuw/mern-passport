@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Home extends Component {
+class Home extends React.Component {
   render() {
     const imageStyle = {
       width: 400
     };
     return (
-      <div>
+      <React.Fragment>
         <p>It's good to be home</p>
         <img style={imageStyle} src="https://i.ytimg.com/vi/N1icEHtgb3g/maxresdefault.jpg" alt="a lovely home" />
-      </div>
+      </React.Fragment>
     );
   };
 };

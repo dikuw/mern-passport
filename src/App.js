@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import Signup from './components/sign-up';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
-import Home from './components/home';
+import Home from './components/Home';
 
 class App extends React.Component {
   state = {
@@ -22,15 +22,13 @@ class App extends React.Component {
 
   getUser = () => {
     axios.get('/user/').then(response => {
-      console.log('Get user response: ', response.data);
+      console.log('App get user response: ', response.data);
       if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ');
         this.setState({
           loggedIn: true,
           username: response.data.user.username
         });
       } else {
-        console.log('Get user: no user');
         this.setState({
           loggedIn: false,
           username: null
