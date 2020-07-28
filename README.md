@@ -3,8 +3,8 @@
 Modified version of https://github.com/b-bly/simple-mern-passport
 
 Changes:
-Set-up to work with MongoDB cloud db. Use variables.env to set your DATABASE string
-Replaced callbacks with aysnc/await where appropriate
+- Set-up to work with MongoDB cloud db. Use variables.env to set your DATABASE string
+- Replaced callbacks with aysnc/await where appropriate
 
 ### Installing
 
