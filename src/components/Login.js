@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('handleSubmit');
+    console.log('LoginForm handleSubmit');
     const { username, password } = this.state;
     let response = await axios.post('/user/login/', { username, password });
     console.log('login response: ', response);

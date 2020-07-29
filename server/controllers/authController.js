@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const passport = require('../passport');
 
 exports.getCurrentUser = (req, res) => {
   console.log('current user: ', req.user);
@@ -38,11 +37,10 @@ exports.logBody = (req, res, next) => {
   next();
 };
 
-exports.login = passport.authenticate('local', (req, res) => {
-  console.log('logged in', req.user);
-  let userInfo = { username: req.user.username };
+exports.login = (req, res) => {
+  var userInfo = { username: req.user.username };
   res.send(userInfo);
-});
+};
 
 exports.logoutUser = (req, res) => {
   if (req.user) {
