@@ -1,42 +1,20 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
 
 class LoginForm extends React.Component {
-  state = {
-    username: '',
-    password: '',
-    redirectTo: null
-  }
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    this.props.updateUser(event.target.name, event.target.value );
   }
 
-  handleSubmit = async (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
-    console.log('LoginForm handleSubmit');
-    const { username, password } = this.state;
-    let response = await axios.post('/user/login/', { username, password });
-    console.log('login response: ', response);
-    if (response.status === 200) {
-      this.props.updateUser({
-        loggedIn: true,
-        username: response.data.username
-      });
-      this.setState({
-        redirectTo: '/'
-      });
-    } else {
-      console.log('login error');
-    }
+    this.props.login();
   }
 
   render() {
-    if (this.state.redirectTo) {
-      return <Redirect to={{ pathname: this.state.redirectTo }} />
+    if (this.props.redirectTo) {
+      return <Redirect to={{ pathname: this.props.redirectTo }} />
     } else {
         return (
           <React.Fragment>
@@ -49,10 +27,8 @@ class LoginForm extends React.Component {
               <div className="col-3 col-mr-auto">
                   <input className="form-input"
                     type="text"
-                    id="username"
                     name="username"
                     placeholder="Username"
-                    value={this.state.username}
                     onChange={this.handleChange}
                   />
                 </div>
@@ -66,7 +42,6 @@ class LoginForm extends React.Component {
                     placeholder="password"
                     type="password"
                     name="password"
-                    value={this.state.password}
                     onChange={this.handleChange}
                   />
                 </div>

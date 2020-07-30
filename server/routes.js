@@ -6,8 +6,8 @@ const passport = require('./passport');
 const authController = require('./controllers/authController');
 
 router.get('/', authController.getCurrentUser);
-router.post('/', authController.checkAlreadyRegistered, authController.registerUser, passport.authenticate('local'), authController.login);
+router.post('/register', authController.checkAlreadyRegistered, authController.registerUser, passport.authenticate('local'), authController.login);
 router.post('/login', passport.authenticate('local'), authController.login);
-router.post('/logout', authController.logoutUser);
+router.post('/logout', authController.logout);
 
 module.exports = router;

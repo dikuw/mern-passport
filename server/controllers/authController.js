@@ -11,10 +11,8 @@ exports.getCurrentUser = (req, res) => {
 };
 
 exports.checkAlreadyRegistered = async (req, res, next) => {
-  console.log('Check for existing user', req.body);
-  console.log('req.body', req.body);
   const { username } = req.body;
-  const registered = await User.find({ username: username });
+  const registered = await User.find({ username });
   if (registered[0] && registered[0]._id) {
     res.json({ error: `Sorry, already a user with the username: ${username}` });
     return;
@@ -23,30 +21,22 @@ exports.checkAlreadyRegistered = async (req, res, next) => {
 }
 
 exports.registerUser = async (req, res, next) => {
-  console.log(' register user');
   const { username, password } = req.body;
-  const newUser = await (new User({ username, password })).save();
-  next();
-  // newUser.save((err, savedUser) => {
-  //   if (err) return res.json(err);
-  //   res.json(savedUser);
-  // });
-};
-
-exports.logBody = (req, res, next) => {
-  console.log('logBody: req.body: ', req.body);
+  await (new User({ username, password })).save();
   next();
 };
 
 exports.login = (req, res) => {
-  var userInfo = { username: req.user.username };
-  res.send(userInfo);
+  req.login(req.user, function(err) {
+    if (err) { res.json({ error: err }); }
+    return res.send(req.user);
+  });
 };
 
-exports.logoutUser = (req, res) => {
+exports.logout = (req, res) => {
   if (req.user) {
     req.logout();
-    res.send({ msg: 'logging out' });
+    res.send({ msg: 'logged out' });
   } else {
     res.send({ msg: 'no user to log out' })
   };
