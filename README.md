@@ -8,6 +8,7 @@ Changes:
 - Moved controlling functions from routes to controllers
 - Split controlling functions into distinct functions
 - Replaced ghost divs with React.Fragment
+- Added automatic login of new user after registering
 
 ### Installing
 

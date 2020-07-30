@@ -45,7 +45,7 @@ class App extends React.Component {
         {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
         <Route exact path="/" component={Home} />
         <Route path="/login" render={() => <Login updateUser={this.updateUser} />} />
-        <Route path="/signup" render={() => <Register/>} />
+        <Route path="/signup" render={() => <Register updateUser={this.updateUser} />} />
       </div>
     );
   };

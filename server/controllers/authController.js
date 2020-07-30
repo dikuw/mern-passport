@@ -22,14 +22,15 @@ exports.checkAlreadyRegistered = async (req, res, next) => {
   next();
 }
 
-exports.registerUser = (req, res) => {
+exports.registerUser = async (req, res, next) => {
   console.log(' register user');
   const { username, password } = req.body;
-  const newUser = new User({ username, password });
-  newUser.save((err, savedUser) => {
-    if (err) return res.json(err);
-    res.json(savedUser);
-  });
+  const newUser = await (new User({ username, password })).save();
+  next();
+  // newUser.save((err, savedUser) => {
+  //   if (err) return res.json(err);
+  //   res.json(savedUser);
+  // });
 };
 
 exports.logBody = (req, res, next) => {
